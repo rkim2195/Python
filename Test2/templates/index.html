@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+  <link rel="stylesheet" type="text/css" 
+   href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+  <link rel="stylesheet" type="text/css" 
+   href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <title>Login/Reg</title>
+</head>
+<body>
+  <div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li class="error">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <legend>Register</legend>
+    <form action="/users/create" method="post">
+        <fieldset>
+          <div>
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" placeholder="First Name">
+          </div>
+          <div>
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" placeholder="Last Name">
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="text" name="email" placeholder="Email">
+          </div>
+          <div>
+            <label for="password">Password:</label>
+            <input type="password" name="password" placeholder="Password">
+          </div>
+          <div>
+            <label for="confirm">Confirm:</label>
+            <input type="password" name="confirm" placeholder="Confirm Password">
+          </div>
+          <input type="submit" value="Register">
+      </fieldset>
+    </form>
+    <legend>Login</legend>
+    <form action="/login" method="post">
+      <fieldset>
+      <div>
+        <label for="email">Email:</label>
+        <input type="text" name="email" placeholder="Email">
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" placeholder="Password">
+      </div>
+        <input type="submit" value="Login">
+      </fieldset>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wall</title>
+</head>
+<body>
+    <h1> Hello {{user['fname']}}!</h1>
+     <a href="/edit">Edit My Account</a>
+     <a href="/logout"><button>Logout</button></a>
+
+    <legend> Add a Quote!</legend>
+     <form action="/post_message" method="POST">
+        <p>Author</p><input type="text" name="a_message_content">
+        <p>Quote</p><input type="text" name="q_message_content">
+            <input type="submit" value="Post Message">
+    </form>
+</div>
+
+    {% for message in messages %}
+        <div>
+            <p>{{message['message_content']}} Posted by <a href="/details/{{message['idmessages']}}">{{message['fname']}} {{message['lname']}}</a> </p>
+
+            <p><a href="/details/{{message['idmessages']}}">{{message['likes']}}</a></p>
+            {% if message['idmessages'] in liked_messages %}
+            <p><a href="/unlike/{{message['idmessages']}}"><button>Unlike!</button></a></p>                
+            {% else: %}
+            <p><a href="/like/{{message['idmessages']}}"><button>Like!</button></a></p>
+            {% endif %}
+
+            {% if my_id == message['author'] %}
+                <a href="/delete/{{message['idmessages']}}"><button>Delete!</button></a>
+            {% endif %}
+        </div>
+
+    {% endfor %}
+    
+</body>
+</html>
